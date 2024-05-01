@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es2019",
+    "lib": ["es2019"],
+    "typeRoots" : ["node_modules/@types", "src/types"],
+    "types": ["node"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+
+    "module": "commonjs",
+    "pretty": true,
+    "moduleResolution": "node",
+    "baseUrl": "src",
+
+    "paths": {
+      "@/*": ["*"],
+      "@api/*": ["api/*"],
+      "@db/*": ["db/*"],
+      "@libs/*": ["libs/*"],
+      "@define": ["libs/define.js"],
+      "@stdlib": ["libs/stdlib.js"],
+      "@appTypes": ["types/index.ts"],
+    },
+    "resolveJsonModule": true,
+
+    "allowJs": true,
+
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./build/",
+    "noEmit": false,
+    "importHelpers": true,
+
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "strict": true,
+  },
+  "include": ["src/**/*.ts", "src/**/*.json", ".env", "src/**/*.js"],
+  "exclude": ["node_modules", "src/public"]
+}

@@ -1,0 +1,28 @@
+.content {
+  display: flex;
+}
+
+.content  .panel {
+  display: flex;
+  flex-direction: column;
+  padding : 10px;
+  border: 2px solid #7594d8;
+  border-radius: 8px;
+  margin-right: 48px;
+  min-width: 200px;
+}
+
+.content  .panel h5 {
+  margin-block-start: 0px;
+}
+
+.content  .panel input { 
+  margin-bottom: 8px;
+}
+
+.content  .panel button {
+  margin-top: 16px;
+  margin-bottom: 4px;
+  padding : 4px;
+}
+

@@ -1,0 +1,1 @@
+./node_modules/.bin/eslint src --ext .js,.jsx,.ts,.tsx

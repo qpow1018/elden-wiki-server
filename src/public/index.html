@@ -1,0 +1,98 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"/>
+    <title>BG Programming Project Skeleton</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <h1> BG Programming Project Skeleton</h1>
+    <div class="content">
+        <div class="panel">
+            <h5>Sign Up</h5>
+            <div>
+                <div>Email : </div>
+                <input type="text" id="txtSignUpEmail"/>
+            </div>
+            <div>
+                <div>Password :</div>
+                <input type="password" id="txtSignUpPassword"/>
+            </div>            
+            <button id="btnSignUp">Sign Up</button>
+            <div>SignUp Result : <span id="lblSignupResult"></span></div>
+        </div>
+        <div class="panel">
+            <h5>Login</h5>
+            <div>
+                <div>Email : </div>
+                <input type="text" id="txtLoginEmail"/>
+            </div>
+            <div>
+                <div>Password :</div>
+                <input type="password" id="txtLoginPassword"/>
+            </div>
+            <button id="btnLogin">Login</button>
+            <div>Login Result : <span id="lblLoginResult"></span></div>
+        </div>        
+        <div class="panel">
+            <button id="btnMyInfo" disabled>Get My Info</button>
+            <pre id="lblMyInfo"></pre>
+        </div>
+    </div>
+
+    <script >
+        let userToken = null;
+
+        const btnSignUp = document.getElementById("btnSignUp");
+        const txtSignUpEmail = document.getElementById("txtSignUpEmail");
+        const txtSignUpPassword = document.getElementById("txtSignUpPassword");        
+        const lblSignupResult = document.getElementById("lblSignupResult");
+        btnSignUp.onclick = ()=>{                        
+            $.post("/api/user/sign-up",{email : txtSignUpEmail.value, password : txtSignUpPassword.value }, (res)=>{
+                lblSignupResult.innerHTML = "OK";
+                txtSignUpEmail.value = "";
+                txtSignUpPassword.value = "";
+            }).fail((e)=>{                
+                lblSignupResult.innerHTML = e.responseJSON.msg;
+            });
+        };
+        
+        const btnLogin = document.getElementById("btnLogin");
+        const txtLoginEmail = document.getElementById("txtLoginEmail");
+        const txtLoginPassword = document.getElementById("txtLoginPassword");
+        const lblLoginResult = document.getElementById("lblLoginResult");        
+        btnLogin.onclick = ()=>{                        
+            $.post("/api/user/login",{email : txtLoginEmail.value, password : txtLoginPassword.value }, (res)=>{                
+                userToken = res.bgData.item.token;
+                lblLoginResult.innerHTML = "OK";
+                console.log(userToken);
+                btnMyInfo.disabled = false;
+            }).fail((e)=>{
+                lblLoginResult.innerHTML = e.responseJSON.msg;                
+                btnMyInfo.disabled = true;
+            });
+        };
+        
+        const btnMyInfo = document.getElementById("btnMyInfo");        
+        btnMyInfo.onclick = ()=>{                                    
+            $.ajax({
+                type : "get",
+                url : "/api/mypage",
+                beforeSend : function(xhr){
+                    xhr.setRequestHeader("Authorization", userToken);
+                },
+                success : function(res){
+                    const resText = JSON.stringify(res.bgData.item, null, 2);
+                    console.info("resText>>", resText);
+                    lblMyInfo.innerHTML = resText;                    
+                },
+                error: function(xhr, status, error){
+                    console.info("error : ", error);
+                },                
+            });
+        };
+
+    </script>
+</body>
+</html>

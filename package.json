@@ -1,0 +1,46 @@
+{
+  "name": "elden-wiki-server",
+  "version": "1.0.0",
+  "author": "",
+  "scripts": {
+    "start": "node ./build/server.js",
+    "setup": "_setup/setup.sh",
+    "build": "./build.sh",
+    "dev": "sh ./run_local_dev.sh"
+  },
+  "dependencies": {
+    "@types/morgan": "^1.9.4",
+    "@types/multer": "^1.4.7",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
+    "argon2": "^0.31.0",
+    "cookie-parser": "~1.4.6",
+    "debug": "~4.3.4",
+    "express": "~4.18.2",
+    "http-errors": "~2.0.0",
+    "lodash": "^4.17.21",
+    "morgan": "~1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.10",
+    "@types/express": "^4.17.17",
+    "@types/lodash": "^4.14.197",
+    "@types/node": "^20.5.1",
+    "@types/pg": "^8.10.2",
+    "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "eslint": "^8.47.0",
+    "nodemon": "^3.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "swagger-ui-themes": "^3.0.1",
+    "tsc-alias": "^1.8.7",
+    "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.1.6"
+  }
+}

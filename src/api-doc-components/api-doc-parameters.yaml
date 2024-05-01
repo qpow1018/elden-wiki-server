@@ -1,0 +1,31 @@
+components:
+  parameters:
+    accessToken: 
+      name: Authorization
+      description: Access Token
+      in: header
+      required: true
+      type: string
+      
+
+  requestBodies:        
+    email:
+      name : Email
+      description: Email address
+      type : string      
+      required : true            
+
+      
+  schemas:
+    UserInfo:
+      name : UserInfo
+      description: User information
+      type : object
+      properties:
+        email:
+          type : string
+          example : "bg@bgprogramming.com"          
+        password:
+          type : string          
+          example : "$argon2i$v=19$m=4096,t=3,p=1$dil8Z/pCJtiIxO069EQsVw$rJG9EavUah2wgqn8wW3MJH2bQ7OBKeJHrvxKko+xlIo"
+        
