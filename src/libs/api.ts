@@ -184,7 +184,13 @@ async function sendErrorMessage(
     "use strict";
     return new Promise(resolve=>{
         const strMessageBuffer = (strMessage) ?  strMessage : error.getErrorString(nErrorCode) ;
-        response.writeHead( nResponseCode, {"Content-Type" : "application/json"} );
+        response.writeHead(
+            nResponseCode,
+            {
+                "Content-Type" : "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        );
 
         const jsonResult = 	{
             code : nErrorCode,
