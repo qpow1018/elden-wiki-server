@@ -151,7 +151,13 @@ function getUserIp(request: Request) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function responseMessage(response : Response, jsonMessage : any) {
     "use strict";
-    response.writeHead( error.responseCodes.RESPONSE_CODE_OK, {"Content-Type" : "application/json"} );
+    response.writeHead(
+        error.responseCodes.RESPONSE_CODE_OK,
+        {
+            "Content-Type" : "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+    );
     if( jsonMessage === undefined || jsonMessage === null )
         return response.end("{}");
 
