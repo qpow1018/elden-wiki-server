@@ -2,14 +2,14 @@ import { PoolClient } from "@appTypes";
 import { checker, postgresUtils } from "@stdlib";
 import query from "./queryPostgres";
 
-async function dbTest() {
+async function getItemCategories() {
   "use strict";
   // checker.assertStrings(email, password);
   return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
-    return await query.dbTest(client);
+    return await query.getItemCategories(client);
   });
 }
 
 export default {
-  dbTest,
+  getItemCategories,
 }
