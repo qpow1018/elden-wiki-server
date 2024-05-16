@@ -1,15 +1,22 @@
 import { PoolClient } from "@appTypes";
-import { checker, postgresUtils } from "@stdlib";
+import { postgresUtils } from "@stdlib";
 import query from "./queryPostgres";
 
-async function getItemCategories() {
+async function getItemMainCategories() {
   "use strict";
-  // checker.assertStrings(email, password);
   return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
-    return await query.getItemCategories(client);
+    return await query.getItemMainCategories(client);
+  });
+}
+
+async function getItemWeapons() {
+  "use strict";
+  return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
+    return await query.getItemWeapons(client);
   });
 }
 
 export default {
-  getItemCategories,
+  getItemMainCategories,
+  getItemWeapons,
 }

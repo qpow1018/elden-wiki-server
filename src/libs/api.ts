@@ -163,11 +163,12 @@ function responseMessage(response : Response, jsonMessage : any) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const jsonResponse : any = {};
-    if (jsonMessage.constructor === Array) {
-        jsonResponse[config.responseTopLevelDataName] = {items: jsonMessage};
-    } else {
-        jsonResponse[config.responseTopLevelDataName] = {item: jsonMessage};
-    }
+    jsonResponse[config.responseTopLevelDataName] = jsonMessage;
+    // if (jsonMessage.constructor === Array) {
+    //     jsonResponse[config.responseTopLevelDataName] = {items: jsonMessage};
+    // } else {
+    //     jsonResponse[config.responseTopLevelDataName] = {item: jsonMessage};
+    // }
 
     response.end( JSON.stringify(jsonResponse) );
 }

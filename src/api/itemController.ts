@@ -1,12 +1,19 @@
-import { DefaultUserApiParams, RouterParameters, UserApiParams, UserInfo } from "@appTypes";
+import { RouterParameters, GuestApiParams, DefaultGuestApiParams } from "@appTypes";
 import { checker, error, utils } from "@stdlib";
 import itemDAO from "@/db/item/itemDAO";
 
 export default function route({ api }: RouterParameters) {
-  api.guest.get   ("/api/item/item-categories",               getItemCategories);
+  api.guest.get   ("/api/item/main-categories",                   getItemMainCategories);
+  api.guest.get   ("/api/item/weapons",                           getItemWeapons);
 }
 
 // ------------------------------------------------------
-async function getItemCategories() {
-  return await itemDAO.getItemCategories();
+
+async function getItemMainCategories() {
+  return await itemDAO.getItemMainCategories();
 }
+
+async function getItemWeapons() {
+  return await itemDAO.getItemWeapons();
+}
+
