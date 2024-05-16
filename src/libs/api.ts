@@ -151,17 +151,24 @@ function getUserIp(request: Request) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function responseMessage(response : Response, jsonMessage : any) {
     "use strict";
-    response.writeHead( error.responseCodes.RESPONSE_CODE_OK, {"Content-Type" : "application/json"} );
+    response.writeHead(
+        error.responseCodes.RESPONSE_CODE_OK,
+        {
+            "Content-Type" : "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+    );
     if( jsonMessage === undefined || jsonMessage === null )
         return response.end("{}");
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const jsonResponse : any = {};
-    if (jsonMessage.constructor === Array) {
-        jsonResponse[config.responseTopLevelDataName] = {items: jsonMessage};
-    } else {
-        jsonResponse[config.responseTopLevelDataName] = {item: jsonMessage};
-    }
+    jsonResponse[config.responseTopLevelDataName] = jsonMessage;
+    // if (jsonMessage.constructor === Array) {
+    //     jsonResponse[config.responseTopLevelDataName] = {items: jsonMessage};
+    // } else {
+    //     jsonResponse[config.responseTopLevelDataName] = {item: jsonMessage};
+    // }
 
     response.end( JSON.stringify(jsonResponse) );
 }
@@ -178,7 +185,13 @@ async function sendErrorMessage(
     "use strict";
     return new Promise(resolve=>{
         const strMessageBuffer = (strMessage) ?  strMessage : error.getErrorString(nErrorCode) ;
-        response.writeHead( nResponseCode, {"Content-Type" : "application/json"} );
+        response.writeHead(
+            nResponseCode,
+            {
+                "Content-Type" : "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+        );
 
         const jsonResult = 	{
             code : nErrorCode,

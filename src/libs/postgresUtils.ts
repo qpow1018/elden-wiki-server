@@ -14,7 +14,6 @@
 import pg, { Pool, PoolClient } from 'pg';
 import assert from "assert";
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //									Init module 											     //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,10 +22,10 @@ pg.types.setTypeParser(pg.types.builtins.INT8, (value)=>{
 });
 
 const pool = new Pool({
-  user: 'bg',
-  host: 'localhost',
-  database: 'bg_programming_skeleton',
-  password: '1234'
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PWD,
 });
 
 

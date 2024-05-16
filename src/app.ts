@@ -6,6 +6,8 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import morgan from 'morgan';
 import fs from "fs";
 
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.enable("trust proxy");
