@@ -36,8 +36,8 @@ async function getItemWeapons(client : PoolClient) {
                 SELECT ROW_TO_JSON(detail.*)
                 FROM (
                   SELECT
-                    w.id as "weaponDetailId",
-                    w.item_id as "weaponDetailItemId",
+                    w.id as "detailId",
+                    w.item_id as "detailItemId",
                     w.upgrade_type as "upgradeType",
                     w.image_url as "imageUrl",
                     w.damage_type as "damageType",
@@ -68,7 +68,7 @@ async function getItemWeapons(client : PoolClient) {
                   FROM item_weapons as w
                   WHERE i.id = w.item_id
                 ) as detail
-              ) as "itemDetail"
+              ) as "detail"
             FROM items as i
             WHERE i.sub_category_no = main.sub_category_no
           ) as weapons
