@@ -42,7 +42,7 @@ async function getItemSubCategory(client: PoolClient, categoryNo: number) {
 }
 
 async function updateItemSubCategory(client: PoolClient, categoryNo: number, description: string | null) {
-  const resultSet = await client.query(
+  await client.query(
     `
       UPDATE
         item_sub_categories
@@ -53,10 +53,6 @@ async function updateItemSubCategory(client: PoolClient, categoryNo: number, des
     `,
     [categoryNo, description]
   );
-
-  console.log('resultSet', resultSet);
-
-  return resultSet;
 }
 
 async function getItemWeapons(client: PoolClient) {

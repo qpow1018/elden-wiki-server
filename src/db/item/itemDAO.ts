@@ -18,8 +18,8 @@ async function getItemSubCategory(categoryNo: number) {
 
 async function updateItemSubCategory(categoryNo: number, description: string | null) {
   "use strict";
-  return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
-    return await query.updateItemSubCategory(client, categoryNo, description);
+  await postgresUtils.defaultQuery(async (client : PoolClient)=>{
+    await query.updateItemSubCategory(client, categoryNo, description);
   });
 }
 

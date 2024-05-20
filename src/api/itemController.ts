@@ -29,7 +29,7 @@ async function updateItemSubCategory({ params, body }: GuestApiParams<{ descript
 
   const description = body.description !== undefined ? body.description : null;
 
-  return await itemDAO.updateItemSubCategory(categoryNo, description);
+  await itemDAO.updateItemSubCategory(categoryNo, description);
 }
 
 async function getItemWeapons() {
