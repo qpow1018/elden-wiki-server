@@ -9,6 +9,20 @@ async function getItemMainCategories() {
   });
 }
 
+async function getItemSubCategory(categoryNo: number) {
+  "use strict";
+  return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
+    return await query.getItemSubCategory(client, categoryNo);
+  });
+}
+
+async function updateItemSubCategory(categoryNo: number, description: string | null) {
+  "use strict";
+  return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
+    return await query.updateItemSubCategory(client, categoryNo, description);
+  });
+}
+
 async function getItemWeapons() {
   "use strict";
   return await postgresUtils.defaultQuery(async (client : PoolClient)=>{
@@ -18,5 +32,7 @@ async function getItemWeapons() {
 
 export default {
   getItemMainCategories,
+  getItemSubCategory,
+  updateItemSubCategory,
   getItemWeapons,
 }

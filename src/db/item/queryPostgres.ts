@@ -1,7 +1,7 @@
 import { PoolClient } from "@appTypes";
 import { error, assert } from "@stdlib";
 
-async function getItemMainCategories(client : PoolClient) {
+async function getItemMainCategories(client: PoolClient) {
   const resultSet = await client.query(
     `
       SELECT
@@ -17,7 +17,49 @@ async function getItemMainCategories(client : PoolClient) {
   return resultSet.rows;
 }
 
-async function getItemWeapons(client : PoolClient) {
+async function getItemSubCategory(client: PoolClient, categoryNo: number) {
+  const resultSet = await client.query(
+    `
+      SELECT
+        id,
+        category_no as "mainCategoryNo",
+        sub_category_no as "subCategoryNo",
+        name,
+        description
+      FROM
+        item_sub_categories
+      WHERE
+        sub_category_no = $1
+    `,
+    [categoryNo]
+  );
+
+  if (resultSet.rowCount === 0) {
+    throw error.newInstanceNotFoundData();
+  }
+
+  return resultSet.rows[0];
+}
+
+async function updateItemSubCategory(client: PoolClient, categoryNo: number, description: string | null) {
+  const resultSet = await client.query(
+    `
+      UPDATE
+        item_sub_categories
+      SET
+        description = $2
+      WHERE
+        sub_category_no = $1
+    `,
+    [categoryNo, description]
+  );
+
+  console.log('resultSet', resultSet);
+
+  return resultSet;
+}
+
+async function getItemWeapons(client: PoolClient) {
   const resultSet = await client.query(
     `
       SELECT
@@ -75,6 +117,7 @@ async function getItemWeapons(client : PoolClient) {
         ) as "weapons"
       FROM item_sub_categories as main
       WHERE category_no = 1
+      ORDER BY main.order_no
     `,
     []
   );
@@ -82,7 +125,7 @@ async function getItemWeapons(client : PoolClient) {
   return resultSet.rows;
 }
 
-async function sqlTest(client : PoolClient) {
+async function sqlTest(client: PoolClient) {
   const resultSet = await client.query(
     `
       SELECT
@@ -147,5 +190,7 @@ async function sqlTest(client : PoolClient) {
 
 export default {
   getItemMainCategories,
+  getItemSubCategory,
+  updateItemSubCategory,
   getItemWeapons,
 }
