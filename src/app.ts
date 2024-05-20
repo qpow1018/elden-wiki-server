@@ -5,12 +5,15 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import morgan from 'morgan';
 import fs from "fs";
+import cors from 'cors';
 
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 app.enable("trust proxy");
+
+app.use(cors());
 
 
 // view engine setup
